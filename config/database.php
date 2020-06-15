@@ -46,7 +46,7 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => 'mysql://ba61a95c9433f6:258ed7dc@us-cdbr-east-05.cleardb.net/heroku_dfb600f40544e73?reconnect=true,
+            'host' => 'mysql://ba61a95c9433f6:258ed7dc@us-cdbr-east-05.cleardb.net/heroku_dfb600f40544e73?reconnect=true',
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'blog'),
             'username' => 'ba61a95c9433f6',
