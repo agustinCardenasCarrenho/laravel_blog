@@ -2,11 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 
-class Posts extends Model
+use Jenssegers\Mongodb\Eloquent\Model as MongoModel;
+
+class Posts extends MongoModel
 {
-     protected $table = 'posts';
+      protected $connection = 'mongodb';
+      protected $collection = 'posts';
 
      protected $fillable = ['title', 'sub_title' , 'content' , 'image', 'user_id'];
 }

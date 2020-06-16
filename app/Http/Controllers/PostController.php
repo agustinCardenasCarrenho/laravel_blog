@@ -17,19 +17,19 @@ class PostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function getPosts(){
-        $posts = DB::table('posts')
+        /*$posts = DB::table('posts')
         ->join('users','users.id' , '=' , 'posts.user_id')
         ->select('posts.title', 'posts.sub_title' , 'posts.image' ,  'posts.content' , 'posts.slug', 'posts.user_id', 'users.name' )
-        ->get();
+        ->get();*/
+        $posts = DB::collection('posts')->get();
         return view('post/posts' , array('posts' => $posts));
     }
 
     public function getPost($slug){
-      //$post = Posts::where('slug' , $slug)->first();
-      $post = DB::table('posts')
-      ->join('users','users.id' , '=' , 'posts.user_id')
-      ->select('posts.title', 'posts.sub_title' , 'posts.image' ,  'posts.content' , 'posts.slug', 'posts.user_id', 'users.name' )
-      ->where('slug' , $slug)
+      $post = DB::collection('posts')
+      /*->join('users','users.id' , '=' , 'posts.user_id')*/
+      /*->select('posts.title', 'posts.sub_title' , 'posts.image' ,  'posts.content' , 'posts.slug', 'posts.user_id', 'users.name' )*/
+      ->where('_id' , $slug)
       ->first();
       return view('post/post',array('post' => $post));
     }
