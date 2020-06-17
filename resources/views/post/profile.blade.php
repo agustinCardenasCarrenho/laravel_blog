@@ -19,7 +19,19 @@
 
 @if(!$posts->isEmpty())
 @foreach($posts as $post)
-  <div class="row shadow-lg p-3 m-5 bg-white rounded">
+  <div class="row shadow-lg p-3 m-5 bg-white rounded ">
+
+    @if(cache('user_id') && cache('user_id') == $user->id )
+    <ul class="nav nav-pills ml-auto">
+      <li class="nav-item dropdown">
+        <a   data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:24px" class="fa">&#xf141;</i></a>
+        <div class="dropdown-menu dropdown-menu-right">
+            <a class="dropdown-item" href="/post/delete/{{$post->id}}">Eliminar</a>
+            <a class="dropdown-item" href="/post/edit/{{$post->id}}">Editar</a>
+          </div>
+      </li>
+    </ul>
+    @endif
     <div class="col-12 text-center mt-5" >
       <h1>{{$post->title}}</h1>
       <small class="">{{$post->sub_title}}</small>

@@ -106,8 +106,17 @@ class PostController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        if(!cache('user_id')){
+            return Redirect::to('/post');
+        }
+
+        if(Posts::where('id' , $id)->first()){
+            Posts::where('id', $id)->delete();
+            return back()->withInput();
+        }else{
+            return response('bad' , 500)->header('Content-Type', 'text/plain');
+        }
+
     }
 }

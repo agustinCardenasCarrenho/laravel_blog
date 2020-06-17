@@ -4,7 +4,6 @@
   @if(!$posts->isEmpty())
     @foreach($posts as $post)
       <div class="row  shadow-lg p-3 m-5 bg-white rounded">
-
         <div class="col-12 text-center mt-5" >
           <h1>{{$post->title}}</h1>
           <small class="">{{$post->sub_title}}</small>

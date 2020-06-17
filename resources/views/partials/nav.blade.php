@@ -19,6 +19,3 @@
   <a href="/user/login" class="btn">Iniciar sesion</a>
   @endif
 </nav>
-<style media="screen">
-
-</style>

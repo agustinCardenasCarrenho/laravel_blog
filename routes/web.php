@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/post', 'PostController@getPosts');
 Route::match(array('GET', 'POST') , '/post/new' , 'PostController@create');
 Route::get('/post/{slug}' , 'PostController@getPost');
+Route::get('/post/delete/{id}' , 'PostController@destroy');
+Route::get('/post/edit/{id}' , 'PostController@edit');
 
 //USERS
 Route::get('/user/profile/{id}', 'PostController@getPostsByUser');
