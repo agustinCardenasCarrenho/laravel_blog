@@ -19,6 +19,7 @@ class UserController extends Controller
       if(cache('user_id')){
         return Redirect::to('/post');
       }
+      
       if($request->method() == 'POST'){
           $user = User::where(array('email' => $request->email  , 'password' => md5($request->password)))->first();
           if($user){

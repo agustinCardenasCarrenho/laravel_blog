@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 //POSTS
-Route::get('/post/user/{id}', 'PostController@getPostsByUser');
 Route::get('/post', 'PostController@getPosts');
 Route::match(array('GET', 'POST') , '/post/new' , 'PostController@create');
 Route::get('/post/{slug}' , 'PostController@getPost');
 
 //USERS
+Route::get('/user/profile/{id}', 'PostController@getPostsByUser');
 Route::match(array('GET' , 'POST'),'/user/login' , 'UserController@index');
 Route::get('/user/logout' , 'UserController@logout');
 Route::match(array('GET' , 'POST') , '/user/new' , 'UserController@create');

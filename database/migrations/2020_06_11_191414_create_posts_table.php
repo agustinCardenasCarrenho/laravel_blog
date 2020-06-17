@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->text('content');
             $table->string('slug');
             $table->string('image');
+            $table->integer('user_id');
         });
     }
 

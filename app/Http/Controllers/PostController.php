@@ -17,19 +17,18 @@ class PostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function getPosts(){
-        /*$posts = DB::table('posts')
+        $posts = DB::table('posts')
         ->join('users','users.id' , '=' , 'posts.user_id')
         ->select('posts.title', 'posts.sub_title' , 'posts.image' ,  'posts.content' , 'posts.slug', 'posts.user_id', 'users.name' )
-        ->get();*/
-        $posts = DB::collection('posts')->get();
+        ->get();
         return view('post/posts' , array('posts' => $posts));
     }
 
     public function getPost($slug){
-      $post = DB::collection('posts')
-      /*->join('users','users.id' , '=' , 'posts.user_id')*/
-      /*->select('posts.title', 'posts.sub_title' , 'posts.image' ,  'posts.content' , 'posts.slug', 'posts.user_id', 'users.name' )*/
-      ->where('_id' , $slug)
+      $post = DB::table('posts')
+      ->join('users','users.id' , '=' , 'posts.user_id')
+      ->select('posts.title', 'posts.sub_title' , 'posts.image' ,  'posts.content' , 'posts.slug', 'posts.user_id', 'users.name' )
+      ->where('slug' , $slug)
       ->first();
       return view('post/post',array('post' => $post));
     }
@@ -58,7 +57,8 @@ class PostController extends Controller{
           'sub_title' => $request->post_sub_title,
           'content' => $request->post_content,
           'image' => $request->post_image,
-          'user_id' => Cache::get('user_id')
+          'slug' => str_replace(' ','-', $request->post_title),
+          'user_id' => cache('user_id')
         ]);
         return response('O.K' , 200)->header('Content-Type', 'text/plain');
       }
