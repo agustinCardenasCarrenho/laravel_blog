@@ -21,7 +21,7 @@
 @foreach($posts as $post)
   <div class="row shadow-lg p-3 m-5 bg-white rounded ">
 
-    @if(cache('user_id') && cache('user_id') == $user->id )
+    @if(session('user') && session('user')[1] == $user->id )
     <ul class="nav nav-pills ml-auto">
       <li class="nav-item dropdown">
         <a   data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i style="font-size:24px" class="fa">&#xf141;</i></a>
