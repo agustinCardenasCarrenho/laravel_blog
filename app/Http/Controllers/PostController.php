@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Redirect;
 use App\Posts;
 use App\User;
@@ -45,7 +44,7 @@ class PostController extends Controller{
      */
     public function create(Request $request){
 
-      if(!cache('user_id')){
+      if(!session('user')){
         return Redirect::to('/post');
       }
 
@@ -58,7 +57,7 @@ class PostController extends Controller{
           'content' => $request->post_content,
           'image' => $request->post_image,
           'slug' => str_replace(' ','-', $request->post_title),
-          'user_id' => cache('user_id')
+          'user_id' => session('user')[1]
         ]);
         return response('O.K' , 200)->header('Content-Type', 'text/plain');
       }
@@ -107,7 +106,7 @@ class PostController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-        if(!cache('user_id')){
+        if(!session('user')){
             return Redirect::to('/post');
         }
 

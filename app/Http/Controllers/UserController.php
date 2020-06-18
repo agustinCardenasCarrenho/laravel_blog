@@ -16,15 +16,19 @@ class UserController extends Controller
      */
     public function index(Request $request){
 
-      if(cache('user_id')){
+      if(session('user')){
         return Redirect::to('/post');
       }
       
       if($request->method() == 'POST'){
           $user = User::where(array('email' => $request->email  , 'password' => md5($request->password)))->first();
           if($user){
-            $request->session()->put('user_name' , $user->name);
-
+            $user = array(
+              'user_id' , $user->id,
+              'user_name' , $user->name,
+              'user_email' , $user->email
+            );
+            $request->session()->put('user', $user);
             return response('OK' , 200)->header('Content-Type', 'text/plain');
           }else{
             return response('BAD' , 500)->header('Content-Type', 'text/plain');
