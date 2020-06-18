@@ -39,48 +39,49 @@
   </div>
 
 
-  <script type="text/javascript">
+<script >
+let new_user_form = document.getElementById('new_user_form');
 
-    let login_form = document.getElementById('new_user_form')
-
-    let user_email = document.getElementById('user_email')
-    let user_password = document.getElementById('user_password')
-    let user_name = document.getElementById('user_name')
-    let user_about_me = document.getElementById('user_about_me')
-    let user_avatar = document.getElementById('user_avatar')
-    let user_background_color = document.getElementById('user_background_color')
+let user_email = document.getElementById('user_email')
+let user_password = document.getElementById('user_password')
+let user_name = document.getElementById('user_name')
+let user_about_me = document.getElementById('user_about_me')
+let user_avatar = document.getElementById('user_avatar')
+let user_background_color = document.getElementById('user_background_color')
 
 
-    login_form.addEventListener('submit' , function(e){
-      e.preventDefault()
+new_user_form.addEventListener('submit' , function(e){
+  e.preventDefault()
 
-      let data = {
-        'email' : user_email.value,
-        'password' : user_password.value,
-        'name' : user_name.value,
-        'about_me' : user_about_me.value,
-        'avatar' : user_avatar.value,
-        'background_color' : user_background_color.value
-      }
+  let data = {
+    'email' : user_email.value,
+    'password' : user_password.value,
+    'name' : user_name.value,
+    'about_me' : user_about_me.value,
+    'avatar' : user_avatar.value,
+    'background_color' : user_background_color.value
+  }
 
-      fetch('/user/new', {
-        headers :{
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
-        },
-        credentials: "same-origin",
-        method: 'POST',
-        body: JSON.stringify(data)
-      }).
-      then(function(response){
-        if(response.status == 200){
-          window.location.href = '/post'
-        }else{
-          alert('mal')
-        }
-      })
+  fetch('/user/new', {
+    headers :{
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "X-Requested-With": "XMLHttpRequest",
+    },
+    credentials: "same-origin",
+    method: 'POST',
+    body: JSON.stringify(data)
+  }).
+  then(function(response){
+    if(response.status == 200){
+      window.location.href = '/post'
+    }else{
+      alert('mal')
+    }
+  })
 
-    })
-  </script>
+})
+
+</script>
+
 @endsection

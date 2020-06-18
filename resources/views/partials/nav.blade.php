@@ -16,6 +16,6 @@
     </li>
   </ul>
   @else
-  <a href="/user/login" class="btn">Iniciar sesion</a>
+  <a href="/user/login" class="btn">login</a>
   @endif
 </nav>

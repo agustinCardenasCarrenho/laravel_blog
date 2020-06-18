@@ -21,7 +21,7 @@ class PostController extends Controller{
         ->join('users','users.id' , '=' , 'posts.user_id')
         ->select('posts.title', 'posts.sub_title' , 'posts.image' ,  'posts.content' , 'posts.slug', 'posts.user_id', 'users.name' )
         ->get();
-        return view('post/posts' , array('posts' => $posts));
+        return view('post/posts' , array('posts' => $posts , 'title' => 'INICIO'));
     }
 
     public function getPost($slug){
@@ -30,13 +30,13 @@ class PostController extends Controller{
       ->select('posts.title', 'posts.sub_title' , 'posts.image' ,  'posts.content' , 'posts.slug', 'posts.user_id', 'users.name' )
       ->where('slug' , $slug)
       ->first();
-      return view('post/post',array('post' => $post));
+      return view('post/post',array('post' => $post , 'title' => $post->title));
     }
 
     public function getPostsByUser($id){
       $posts = Posts::where('user_id' , $id )->get();
       $user = User::where('id' , $id)->first();
-      return view('post/profile' , array('posts' => $posts ,'user' => $user));
+      return view('post/profile' , array('posts' => $posts ,'user' => $user , 'title' => 'PERFIL DE : '.$user->name));
     }
     /**
      * Show the form for creating a new resource.
@@ -50,7 +50,7 @@ class PostController extends Controller{
       }
 
       if($request->method() == 'GET'){
-        return view('post/new_post');
+        return view('post/new_post' , array('title' => 'NUEVO POST'));
       }else{
         Posts::create([
           'title' => $request->post_title,
