@@ -19,26 +19,25 @@ class UserController extends Controller
       if(cache('user_id')){
         return Redirect::to('/post');
       }
+      
       if($request->method() == 'POST'){
           $user = User::where(array('email' => $request->email  , 'password' => md5($request->password)))->first();
           if($user){
-              Cache::putMany(
-              array(
-              'user_id' => $user->id,
-              'user_name' => $user->name ,
-              'email' => $user->email )
-              );
-              return response('OK' , 200)->header('Content-Type', 'text/plain');
+            $request->session()->put('user_name' , $user->name);
+
+            return response('OK' , 200)->header('Content-Type', 'text/plain');
           }else{
-              return response('BAD' , 500)->header('Content-Type', 'text/plain');
+            return response('BAD' , 500)->header('Content-Type', 'text/plain');
           }
+          
       }else{
         return view('user/login' , array('title' => 'INICIO DE SESIÓN'));
       }
+      
     }
 
-    public function logout(){
-      Cache::flush();
+    public function logout(Request $request){
+      $request->session()->flush();
       return back()->withInput();
     }
 
@@ -54,7 +53,7 @@ class UserController extends Controller
       }
 
       if($request->method() == 'GET'){
-        return view('user/new_user' , array('title' => 'REGISTRO'));
+        return view('user/new_user' , array('title' => 'REGISTRO') );
       }else{
         User::create([
           'name' => $request->name,

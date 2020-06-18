@@ -38,7 +38,6 @@
     </form>
   </div>
 
-
 <script >
 let new_user_form = document.getElementById('new_user_form');
 
