@@ -165,8 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
-         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        Superbalist\LaravelGoogleCloudStorage\GoogleCloudStorageServiceProvider::class,
         /*
          * Application Service Providers...
          */
